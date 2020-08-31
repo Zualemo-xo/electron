@@ -3,7 +3,6 @@
 from __future__ import print_function
 import argparse
 import datetime
-import errno
 import hashlib
 import json
 import mmap
@@ -12,18 +11,16 @@ import shutil
 import subprocess
 from struct import Struct
 import sys
-import tempfile
 
 sys.path.append(
   os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + "/../.."))
 
-from io import StringIO
 from zipfile import ZipFile
 from lib.config import PLATFORM, get_target_arch,  get_env_var, s3_config, \
                        get_zip_name
 from lib.util import get_electron_branding, execute, get_electron_version, \
-                     scoped_cwd, s3put, get_electron_exec, \
-                     get_out_dir, SRC_DIR, ELECTRON_DIR
+                     s3put, get_electron_exec, get_out_dir, \
+                     SRC_DIR, ELECTRON_DIR
 
 
 ELECTRON_REPO = 'electron/electron'
@@ -155,7 +152,7 @@ def parse_args():
 def run_python_upload_script(script, *args):
   script_path = os.path.join(
     ELECTRON_DIR, 'script', 'release', 'uploaders', script)
-  return execute([sys.executable, script_path] + list(args))
+  print(execute([sys.executable, script_path] + list(args)))
 
 
 def get_electron_build_version():

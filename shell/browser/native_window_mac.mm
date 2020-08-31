@@ -632,13 +632,6 @@ void NativeWindowMac::Close() {
 }
 
 void NativeWindowMac::CloseImmediately() {
-  // Remove event monitor before destroying window, otherwise the monitor may
-  // call its callback after window has been destroyed.
-  if (wheel_event_monitor_) {
-    [NSEvent removeMonitor:wheel_event_monitor_];
-    wheel_event_monitor_ = nil;
-  }
-
   // Retain the child window before closing it. If the last reference to the
   // NSWindow goes away inside -[NSWindow close], then bad stuff can happen.
   // See e.g. http://crbug.com/616701.
