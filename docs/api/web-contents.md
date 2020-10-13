@@ -837,6 +837,19 @@ Emitted when `remote.getCurrentWebContents()` is called in the renderer process.
 Calling `event.preventDefault()` will prevent the object from being returned.
 Custom value can be returned by setting `event.returnValue`.
 
+#### Event: 'preferred-size-changed'
+
+Returns:
+
+* `event` Event
+* `preferredSize` [Size](structures/size.md) - The minimum size needed to
+  contain the layout of the document—without requiring scrolling.
+
+Emitted when the `WebContents` preferred size has changed.
+
+This event will only be emitted when `enablePreferredSizeMode` is set to `true`
+in `webPreferences`.
+
 ### Instance Methods
 
 #### `contents.loadURL(url[, options])`
@@ -846,7 +859,7 @@ Custom value can be returned by setting `event.returnValue`.
   * `httpReferrer` (String | [Referrer](structures/referrer.md)) (optional) - An HTTP Referrer url.
   * `userAgent` String (optional) - A user agent originating the request.
   * `extraHeaders` String (optional) - Extra headers separated by "\n".
-  * `postData` ([UploadRawData[]](structures/upload-raw-data.md) | [UploadFile[]](structures/upload-file.md) | [UploadBlob[]](structures/upload-blob.md)) (optional)
+  * `postData` ([UploadRawData[]](structures/upload-raw-data.md) | [UploadFile[]](structures/upload-file.md)) (optional)
   * `baseURLForDataURL` String (optional) - Base url (with trailing path separator) for files to be loaded by the data url. This is needed only if the specified `url` is a data url and needs to load other files.
 
 Returns `Promise<void>` - the promise will resolve when the page has finished loading
